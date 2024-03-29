@@ -12,7 +12,7 @@ const Navbar = () => {
         <div>
           <Link
             className="flex items-center gap-1 text-xl font-semibold text-primary"
-            href={"/"}
+            href="/"
           >
             <span>
               <Gamepad2 className="w-7 h-7" />
