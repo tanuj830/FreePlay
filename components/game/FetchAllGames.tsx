@@ -93,7 +93,7 @@ const FetchAllGames = ({ games }: FetchAllGamesProps) => {
   return (
     <div className="transition-all duration-1000">
       <div className="pb-3">
-        <div className="py-5 flex items-center gap-3 justify-center z-[1000]">
+        <div className="py-5 flex items-center gap-3 justify-start z-[1000]">
           <Combobox
             setValue={setValue}
             setCombobox={setCombox}

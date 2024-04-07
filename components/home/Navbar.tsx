@@ -7,7 +7,7 @@ import { ThemeButton } from "../theme/themeButton";
 
 const Navbar = () => {
   return (
-    <nav className="w-full py-3 ">
+    <nav className="w-full py-4 ">
       <div className="flex justify-between items-center gap-12">
         <div>
           <Link

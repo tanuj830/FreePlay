@@ -73,11 +73,11 @@ const ShowSpecificGame: React.FC<Game> = ({ game }) => {
                 <CarouselContent className="w-full">
                   {game.screenshots?.map((img, index) => (
                     <CarouselItem key={index} className="w-full">
-                      <div className="p-1 w-full">
+                      <div className=" w-full">
                         <img
                           src={img.image}
                           alt="screenshots"
-                          className="rounded-xl object-cover"
+                          className="rounded-md object-cover"
                         />
                       </div>
                     </CarouselItem>
@@ -88,7 +88,7 @@ const ShowSpecificGame: React.FC<Game> = ({ game }) => {
               </Carousel>
             ) : (
               <img
-                className=" rounded-md shadow-sm fade w-full"
+                className=" rounded-md shadow-sm fade w-full h-full lg:h-[70vh]"
                 src={game.thumbnail}
                 alt="poster"
               />
