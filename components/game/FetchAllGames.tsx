@@ -69,7 +69,7 @@ const FetchAllGames = ({ games }: FetchAllGamesProps) => {
 
         setLoading(false);
       });
-    } else if (combox === "Categories") {
+    } else if (combox === "Category") {
       setLoading(true);
       const options = {
         method: "GET",
@@ -90,6 +90,7 @@ const FetchAllGames = ({ games }: FetchAllGamesProps) => {
         setLoading(false);
       });
     }
+    console.log(filteredData);
   }, [value, setCombox]);
 
   return (

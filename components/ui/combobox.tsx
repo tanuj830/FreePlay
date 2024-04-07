@@ -2,15 +2,6 @@
 import React from "react";
 
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -44,14 +35,14 @@ export const Combobox = ({
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className=" ">
-        <Button
-          variant={"secondary"}
-          className="hidden md:block"
-        >{`Select ${selectText} `}</Button>
-        <Button
-          variant={"secondary"}
-          className="block md:hidden"
-        >{`${selectText} `}</Button>
+        <span
+          // variant={"secondary"}
+          className="hidden md:block py-2 px-4 text-sm bg-muted rounded-md"
+        >{`Select ${selectText} `}</span>
+        <span
+          // variant={"secondary"}
+          className="block md:hidden py-2 px-4 text-sm bg-muted rounded-md"
+        >{`${selectText} `}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[200px] p-2 ">
         {list.map((l, ind) => (
