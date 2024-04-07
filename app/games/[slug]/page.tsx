@@ -15,6 +15,12 @@ interface Game {
   developer: string;
   publisher: string;
   platform: string;
+  screenshots: [
+    {
+      id: number;
+      image: string;
+    }
+  ];
   genre: string;
   minimum_system_requirements: {
     os: string;

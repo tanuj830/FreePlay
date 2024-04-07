@@ -6,7 +6,7 @@ const page = async () => {
   const games = await fetchAllGames();
   return (
     <>
-      <FetchAllGames games={games} />;
+      <FetchAllGames games={games} />
     </>
   );
 };

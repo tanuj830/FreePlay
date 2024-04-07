@@ -111,7 +111,28 @@ const FetchAllGames = ({ games }: FetchAllGamesProps) => {
         </div>
 
         {filteredData?.length > 0 ? (
-          <div>filtered data</div>
+          <div className="grid gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 relative">
+            {filteredData.map((game: game) => (
+              <Link
+                aria-disabled="true"
+                key={game.id}
+                href={`/games/${game.id}`}
+              >
+                <div className="relative">
+                  {game.genre.length > 0 ? (
+                    <span className="bg-primary text-primary-foreground text-xs px-2  absolute top-2 left-2 rounded-full z-10">
+                      {game.genre}
+                    </span>
+                  ) : null}
+                  <img
+                    src={game.thumbnail}
+                    alt="thumbnail"
+                    className="rounded-md"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
         ) : (
           <div className="grid gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 relative">
             {games.map((game: game) => (

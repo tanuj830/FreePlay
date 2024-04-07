@@ -30,12 +30,11 @@ export const Combobox = ({
   const [open, setOpen] = React.useState(false);
 
   const handleValue = (e: any) => {
-    e.stopProp;
     setValue(e);
     setCombobox(selectText);
   };
   return (
-    <Select onValueChange={handleValue} defaultValue={list[0].value}>
+    <Select onValueChange={handleValue}>
       <SelectTrigger className="w-[300px] ">
         <SelectValue placeholder={`Select ${selectText} `} />
       </SelectTrigger>
