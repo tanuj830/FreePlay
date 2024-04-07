@@ -10,6 +10,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./dropdown-menu";
+import { Button } from "./button";
 
 interface ComboboxProps {
   list: Array<{
@@ -34,19 +42,28 @@ export const Combobox = ({
     setCombobox(selectText);
   };
   return (
-    <Select onValueChange={handleValue}>
-      <SelectTrigger className="w-[300px] ">
-        <SelectValue placeholder={`Select ${selectText} `} />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {list.map((l, ind) => (
-            <SelectItem key={ind} value={l.value}>
-              {l.label}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger className=" ">
+        <Button
+          variant={"secondary"}
+          className="hidden md:block"
+        >{`Select ${selectText} `}</Button>
+        <Button
+          variant={"secondary"}
+          className="block md:hidden"
+        >{`${selectText} `}</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-[200px] p-2 ">
+        {list.map((l, ind) => (
+          <DropdownMenuItem
+            key={ind}
+            onClick={() => handleValue(l.value)}
+            className=""
+          >
+            {l.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

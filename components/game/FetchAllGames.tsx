@@ -9,6 +9,7 @@ import {
   fetchGameByPlatform,
 } from "@/lib/fetchAllGames";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 interface FetchAllGamesProps {
   games: Array<{
@@ -63,10 +64,11 @@ const FetchAllGames = ({ games }: FetchAllGamesProps) => {
           "X-RapidAPI-Host": "free-to-play-games-database.p.rapidapi.com",
         },
       };
-      const res = axios
-        .request(options)
-        .then((res) => setFilteredData(res.data));
-      setLoading(false);
+      const res = axios.request(options).then((res) => {
+        setFilteredData(res.data);
+
+        setLoading(false);
+      });
     } else if (combox === "Categories") {
       setLoading(true);
       const options = {
@@ -82,77 +84,103 @@ const FetchAllGames = ({ games }: FetchAllGamesProps) => {
         },
       };
 
-      const res = axios
-        .request(options)
-        .then((res) => setFilteredData(res.data));
-      console.log(filteredData);
-      setLoading(false);
+      const res = axios.request(options).then((res) => {
+        setFilteredData(res.data);
+
+        setLoading(false);
+      });
     }
   }, [value, setCombox]);
 
   return (
-    <div className="transition-all duration-1000">
-      <div className="pb-3">
-        <div className="py-5 flex items-center gap-3 justify-start z-[1000]">
-          <Combobox
-            setValue={setValue}
-            setCombobox={setCombox}
-            value={value}
-            selectText={"Platform"}
-            list={byPlatform}
-          />
-          <Combobox
-            setCombobox={setCombox}
-            setValue={setValue}
-            value={value}
-            selectText={"Categories"}
-            list={byCategories}
-          />
+    <div className="transition-all duration-1000 w-full">
+      <div className="pb-3 w-full">
+        <div className="flex justify-between items-center w-full pb-3">
+          <div className="w-full">
+            <span className="text-muted-foreground text-xs">home/games</span>
+            {loading === true ? (
+              <span className="flex gap-1 items-center pb-4 text-sm ">
+                <Loader2 className="animate-spin w-5 h-5" />
+
+                <span>Loading </span>
+              </span>
+            ) : (
+              <span className="text-xs md:text-sm  text-muted-foreground pb-4 flex items-center underline underline-offset-2 ">
+                <span>
+                  {" "}
+                  Results for{" "}
+                  <span className="text-primary">
+                    {value.length === 0 ? "all" : value}
+                  </span>
+                </span>
+              </span>
+            )}
+          </div>
+          <div className="py-5 flex items-center gap-1 md:gap-3 justify-end w-full ">
+            <Combobox
+              setValue={setValue}
+              setCombobox={setCombox}
+              value={value}
+              selectText={"Platform"}
+              list={byPlatform}
+            />
+            <Combobox
+              setCombobox={setCombox}
+              setValue={setValue}
+              value={value}
+              selectText={"Category"}
+              list={byCategories}
+            />
+          </div>
         </div>
 
-        {filteredData?.length > 0 ? (
-          <div className="grid gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 relative">
-            {filteredData.map((game: game) => (
-              <Link
-                aria-disabled="true"
-                key={game.id}
-                href={`/games/${game.id}`}
-              >
-                <div className="relative">
-                  {game.genre.length > 0 ? (
-                    <span className="bg-primary text-primary-foreground text-xs px-2  absolute top-2 left-2 rounded-full z-10">
-                      {game.genre}
-                    </span>
-                  ) : null}
-                  <img
-                    src={game.thumbnail}
-                    alt="thumbnail"
-                    className="rounded-md"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="grid gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 relative">
-            {games.map((game: game) => (
-              <Link key={game.id} href={`/games/${game.id}`}>
-                <div className="relative">
-                  {game.genre.length > 0 ? (
-                    <span className="bg-primary text-primary-foreground text-xs px-2  absolute top-2 left-2 rounded-full z-10">
-                      {game.genre}
-                    </span>
-                  ) : null}
-                  <img
-                    src={game.thumbnail}
-                    alt="thumbnail"
-                    className="rounded-md"
-                  />
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className="relative">
+          {filteredData?.length > 0 ? (
+            <>
+              <div className="grid gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 relative">
+                {filteredData.map((game: game) => (
+                  <Link
+                    aria-disabled="true"
+                    key={game.id}
+                    href={`/games/${game.id}`}
+                  >
+                    <div className="relative">
+                      {game.genre.length > 0 ? (
+                        <span className="bg-primary text-primary-foreground text-xs px-2  absolute top-2 left-2 rounded-full ">
+                          {game.genre}
+                        </span>
+                      ) : null}
+                      <img
+                        src={game.thumbnail}
+                        alt="thumbnail"
+                        className="rounded-md"
+                      />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="grid gap-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 relative">
+              {games.map((game: game) => (
+                <Link key={game.id} href={`/games/${game.id}`}>
+                  <div className="relative">
+                    {game.genre.length > 0 ? (
+                      <span className="bg-primary text-primary-foreground text-xs px-2  absolute top-2 left-2 rounded-full z-10">
+                        {game.genre}
+                      </span>
+                    ) : null}
+                    <img
+                      src={game.thumbnail}
+                      alt="thumbnail"
+                      className="rounded-md"
+                    />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
